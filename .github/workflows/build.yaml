@@ -1,19 +1,12 @@
-# 静的コンテンツを GitHub Pages にデプロイするためのシンプルなワークフロー
-name: Deploy static content to Pages
-
+name: Build Image and Push
 on:
-  # デフォルトブランチを対象としたプッシュ時にで実行されます
   push:
     branches: ['main', 'actions-exp']
-
-  # Actions タブから手動でワークフローを実行できるようにします
   workflow_dispatch:
 
 permissions:
   contents: read
   id-token: write
-
-# 1 つの同時デプロイメントを可能にする
 concurrency:
   group: 'pages'
   cancel-in-progress: true
@@ -22,7 +15,6 @@ env:
   SAMRLE: some_value
   AWS_REGION: ap-northeast-1
 jobs:
-  # デプロイするだけなので、単一のデプロイジョブ
   deploy:
     environment:
       name: github-pages
@@ -41,7 +33,7 @@ jobs:
         with:
           audience: sts.amazonaws.com.cn
           role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/kagari-ecr-image-pusher
-          aws-region: $AWS_REGION
+          aws-region: ${{env.AWS_REGION}}
       - name: Login to Amazon ECR Private
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
