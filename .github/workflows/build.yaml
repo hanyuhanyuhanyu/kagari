@@ -1,18 +1,17 @@
 name: Build Image and Push
 on:
   push:
-    branches: ['main', 'actions-exp']
+    branches: ["main", "actions-exp"]
   workflow_dispatch:
 
 permissions:
   contents: read
   id-token: write
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: true
 
 env:
-  SAMRLE: some_value
   AWS_REGION: ap-northeast-1
 jobs:
   deploy:
@@ -27,21 +26,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
+          cache: "npm"
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           audience: sts.amazonaws.com
           role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:role/kagari-ecr-image-pusher
           aws-region: ${{env.AWS_REGION}}
-      - name: Login to Amazon ECR Private
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
       - name: Install dependencies
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Build Docker Image
-        run: docker build -t ${{secrets.AWS_ACCOUNT_ID}}.dkr.ecr.$AWS_REGION.amazonaws.com/kagari/frontend:latest .
-      - name: Push Docker Image
-        run: docker push ${{secrets.AWS_ACCOUNT_ID}}.dkr.ecr.$AWS_REGION.amazonaws.com/kagari/frontend:latest
+      - name: push static file to s3
+        run: aws s3 sync ./dist s3://kagari-frontend-static --delete --class STANDARD_IA
