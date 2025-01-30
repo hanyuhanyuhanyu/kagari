@@ -1,4 +1,4 @@
-name: Build Image and Push
+name: Build And Put Static Files
 on:
   push:
     branches: ["main", "actions-exp"]
@@ -38,4 +38,4 @@ jobs:
       - name: Build
         run: npm run build
       - name: push static file to s3
-        run: aws s3 sync ./dist s3://kagari-frontend-static --delete --class STANDARD_IA
+        run: aws s3 sync ./dist s3://kagari-frontend-static --delete --storage-class STANDARD_IA
