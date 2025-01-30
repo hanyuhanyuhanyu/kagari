@@ -1,7 +1,7 @@
 name: Build And Put Static Files
 on:
   push:
-    branches: ["main", "actions-exp"]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -15,9 +15,6 @@ env:
   AWS_REGION: ap-northeast-1
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
