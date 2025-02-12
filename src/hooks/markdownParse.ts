@@ -31,7 +31,7 @@ function VisualizeMermaid() {
   };
 }
 
-async function parseMarkdown(text: string) {
+export async function parseMarkdown(text: string) {
   const uni = await unified()
     .use(remarkParse)
     .use(RemarkBreaks)
@@ -42,4 +42,3 @@ async function parseMarkdown(text: string) {
     .process(text);
   return DOMPurify.sanitize(uni.toString());
 }
-export const useMarkdownParser = useAwaitable(parseMarkdown);
