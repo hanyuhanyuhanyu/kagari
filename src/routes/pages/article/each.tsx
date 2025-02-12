@@ -5,9 +5,9 @@ import { parseMarkdown } from "../../../hooks/markdownParse";
 
 function Article() {
   const { url } = useParams();
-  const [html] = useAwaitable((u) => articleApi.getBody(u).then(parseMarkdown))(
-    decodeURIComponent(url || "")
-  );
+  const { result: html } = useAwaitable((u) =>
+    articleApi.getBody(u).then(parseMarkdown)
+  )(decodeURIComponent(url || ""));
   return <div dangerouslySetInnerHTML={{ __html: html || "" }} />;
 }
 

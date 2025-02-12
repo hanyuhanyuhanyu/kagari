@@ -1,24 +1,46 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 
+type AwaitResult<T> = {
+  loading: boolean;
+} & (
+  | {
+      result: undefined;
+      processed: false;
+      error: null;
+    }
+  | {
+      result: T;
+      processed: true;
+      error: null;
+    }
+  | {
+      result: undefined;
+      processed: true;
+      error: Error;
+    }
+);
 export const useAwaitable = <T extends (...args: any) => Promise<any>>(
   f: T
 ) => {
-  return (
-    ...arg: Parameters<T>
-  ): [Awaited<ReturnType<T>> | undefined, boolean, Error | null] => {
-    const [loading, setLoading] = useState(false);
-    const [result, setResult] = useState<Awaited<ReturnType<T>> | undefined>(
-      undefined
+  return (...arg: Parameters<T>): AwaitResult<Awaited<ReturnType<T>>> => {
+    type TargetType = AwaitResult<Awaited<ReturnType<T>>>;
+    const [state, dispatch] = useReducer(
+      (r: TargetType, action: Partial<TargetType>) =>
+        Object.assign({}, r, action),
+      {
+        loading: false,
+        result: undefined,
+        processed: false,
+        error: null,
+      }
     );
-    const [error, setError] = useState(null);
 
     useEffect(() => {
-      setLoading(true);
+      dispatch({ loading: true });
       f(...arg)
-        .then(setResult)
-        .catch(setError)
-        .finally(() => setLoading(false));
+        .then((result) => dispatch({ result, processed: true, loading: false }))
+        .catch((error) => dispatch({ error, processed: true, loading: false }));
     }, [...arg]);
-    return [result, loading, error];
+    return state;
   };
 };

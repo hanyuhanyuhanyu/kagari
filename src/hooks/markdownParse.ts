@@ -4,7 +4,6 @@ import rehypeStringify from "rehype-stringify";
 import RemarkBreaks from "remark-breaks";
 import RemarkEmoji from "remark-emoji";
 import { unified } from "unified";
-import { useAwaitable } from "./awaitable";
 import remarkParse from "remark-parse";
 import type { Root } from "mdast";
 import mermaid from "mermaid";
