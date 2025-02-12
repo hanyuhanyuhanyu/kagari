@@ -9,6 +9,8 @@ import { unified } from "unified";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import remarkParse from "remark-parse";
+import { getTheme } from "../../../global/theme";
+mermaid.initialize({ theme: getTheme() });
 function VisualizeMermaid() {
   return async function (tree: Root) {
     await Promise.all(
@@ -35,8 +37,8 @@ function Article() {
         .use(RemarkBreaks)
         .use(RemarkEmoji)
         .use(VisualizeMermaid)
-        .use(remarkRehype, { allowDangerousHtml: true }) // TODO: なんとかして
-        .use(rehypeStringify, { allowDangerousHtml: true }) // TODO: なんとかして
+        .use(remarkRehype, { allowDangerousHtml: true })
+        .use(rehypeStringify, { allowDangerousHtml: true })
         .process(text);
       setText(uni.toString());
     })();
