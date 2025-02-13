@@ -46,6 +46,6 @@ export const useAwaitable = <T extends unknown[], U>(
         })
       )
       .catch((error) => dispatch({ error, processed: true, loading: false }));
-  }, [f, args]);
+  }, []);
   return state;
 };
