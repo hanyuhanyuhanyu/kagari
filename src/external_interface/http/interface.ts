@@ -1,4 +1,4 @@
-export type RequestType<T = any> = {
+export type RequestType<T = unknown> = {
   url: string | URL;
   method: string;
   contentType?: string;

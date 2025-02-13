@@ -1,7 +1,7 @@
 import { IHttpClient, RequestType } from "../external_interface/http/interface";
 
 export const httpClient: IHttpClient = {
-  async fetchJson<T>(req: RequestType): Promise<T> {
+  async fetchJson<T>(req: RequestType<T>): Promise<T> {
     const res = await fetch(req.url, {
       method: req.method,
       headers: {

@@ -9,6 +9,7 @@ import type { Root } from "mdast";
 import mermaid from "mermaid";
 import { getTheme } from "../global/theme";
 import rehypeExpressiveCode from "rehype-expressive-code";
+
 mermaid.initialize({ theme: getTheme() });
 function VisualizeMermaid() {
   return async function (tree: Root) {

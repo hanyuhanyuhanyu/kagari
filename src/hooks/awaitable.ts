@@ -19,28 +19,33 @@ type AwaitResult<T> = {
       error: Error;
     }
 );
-export const useAwaitable = <T extends (...args: any) => Promise<any>>(
-  f: T
-) => {
-  return (...arg: Parameters<T>): AwaitResult<Awaited<ReturnType<T>>> => {
-    type TargetType = AwaitResult<Awaited<ReturnType<T>>>;
-    const [state, dispatch] = useReducer(
-      (r: TargetType, action: Partial<TargetType>) =>
-        Object.assign({}, r, action),
-      {
-        loading: false,
-        result: undefined,
-        processed: false,
-        error: null,
-      }
-    );
+export const useAwaitable = <T extends unknown[], U>(
+  f: (...args: T) => Promise<U>,
+  ...args: T
+): AwaitResult<U> => {
+  type TargetType = AwaitResult<U>;
+  const [state, dispatch] = useReducer(
+    (r: TargetType, action: Partial<TargetType>) =>
+      Object.assign({}, r, action),
+    {
+      loading: false,
+      result: undefined,
+      processed: false,
+      error: null,
+    }
+  );
 
-    useEffect(() => {
-      dispatch({ loading: true });
-      f(...arg)
-        .then((result) => dispatch({ result, processed: true, loading: false }))
-        .catch((error) => dispatch({ error, processed: true, loading: false }));
-    }, [...arg]);
-    return state;
-  };
+  useEffect(() => {
+    dispatch({ loading: true });
+    f(...args)
+      .then((result) =>
+        dispatch({
+          result: result,
+          processed: true,
+          loading: false,
+        })
+      )
+      .catch((error) => dispatch({ error, processed: true, loading: false }));
+  }, [f, args]);
+  return state;
 };
