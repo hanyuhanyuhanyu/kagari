@@ -6,10 +6,6 @@ import { articleApi } from "../../external_interface/http/backend/article";
 import { useAwaitable } from "../../hooks/awaitable";
 import { useState } from "react";
 
-type Article = {
-  url: string;
-  title: string;
-};
 type Props = {
   className?: string;
 };
