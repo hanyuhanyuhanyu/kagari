@@ -1,0 +1,5 @@
+.markdown-wrapper {
+  :first-child {
+    margin-top: 0;
+  }
+}

@@ -1,68 +1,45 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@layer reset, theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@layer reset {
+  :root,
+  :root * {
+    --divider0: var(--color-neutral-500);
+    --divider-1: var(--color-neutral-300);
+    --bg-color: var(--color-zinc-900);
+    --text-color-weaken: var(--color-neutral-400);
+    font-family: "YU Gothic UI", sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    color-scheme: dark;
+    color: var(--color-neutral-50);
+    border-color: var(--divider0);
+    font-synthesis: weight style;
+    text-rendering: optimizeLegibility;
+    scrollbar-width: thin;
+    scrollbar-color: var(--divider-1) var(--bg-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    background-color: var(--bg-color);
+    color: var(--color-neutral-50);
+    * {
+      background-color: inherit;
+      color: inherit;
+    }
   }
-  a:hover {
-    color: #747bff;
+
+  body {
+    margin: 0;
+    display: static;
+    min-width: 320px;
+    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
   }
-  button {
-    background-color: #f9f9f9;
+  .border-color-light {
+    border-color: var(--divider-1);
   }
 }

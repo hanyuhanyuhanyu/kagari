@@ -9,6 +9,7 @@ import type { Root } from "mdast";
 import mermaid from "mermaid";
 import { getTheme } from "../global/theme";
 import rehypeExpressiveCode from "rehype-expressive-code";
+import remarkGfm from "remark-gfm";
 
 mermaid.initialize({ theme: getTheme() });
 function VisualizeMermaid() {
@@ -36,6 +37,7 @@ export async function parseMarkdown(text: string) {
   const uni = await unified()
     .use(remarkParse)
     .use(RemarkBreaks)
+    .use(remarkGfm)
     .use(RemarkEmoji)
     .use(VisualizeMermaid)
     .use(remarkRehype, { allowDangerousHtml: true })
