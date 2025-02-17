@@ -1,0 +1,9 @@
+.markdown-wrapper {
+  :first-child {
+    margin-top: 0;
+  }
+  svg {
+    color: inherit;
+    background-color: transparent;
+  }
+}
