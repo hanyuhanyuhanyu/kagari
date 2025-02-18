@@ -1,6 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+// storybookで表示させる時に不都合な設定はweb.cssに隔離する
+import "./web.css";
 import App from "./App.tsx";
 
 const root = createRoot(document.getElementById("root")!);
