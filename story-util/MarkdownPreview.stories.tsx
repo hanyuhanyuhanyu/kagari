@@ -1,18 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Markdown from "../src/components/organisms/Markdown";
-import { useEffect, useState } from "react";
 function MarkdownPreview({ src }: { src: string }) {
-  const [text, setText] = useState<string>();
-  useEffect(() => {
-    fetch(`/${src}`)
-      .then((r) => r.text())
-      .then(setText);
-  }, []);
-  if (!text) return <></>;
   return (
     <div className="overflow-auto">
-      <Markdown text={text} />
+      <Markdown fetcher={() => fetch(`/${src}`).then((r) => r.text())} />
     </div>
   );
 }
@@ -27,5 +19,10 @@ type Story = StoryObj<typeof MarkdownPreview>;
 export const _20250127: Story = {
   args: {
     src: "20250127.md",
+  },
+};
+export const _20250219: Story = {
+  args: {
+    src: "20250219.md",
   },
 };

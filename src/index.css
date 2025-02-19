@@ -1,6 +1,8 @@
 @layer reset, theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
+@import "./emoji.css";
+
 @layer reset {
   :root,
   :root * {
@@ -8,7 +10,7 @@
     --divider-1: var(--color-neutral-300);
     --bg-color: var(--color-zinc-900);
     --text-color-weaken: var(--color-neutral-400);
-    font-family: "YU Gothic UI", sans-serif;
+    font-family: EmojiFont, "YU Gothic UI", sans-serif;
     box-sizing: border-box;
     position: relative;
     color-scheme: dark;

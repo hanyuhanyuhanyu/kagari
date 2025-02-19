@@ -3,9 +3,11 @@ import { parseMarkdown } from "../../../hooks/markdownParse";
 import Loader from "../../atoms/Loader";
 import "./style.css";
 
-type Props = { text: string };
+type Props = { fetcher: () => Promise<string> };
 function Markdown(props: Props) {
-  const { result: html, valid } = useAwaitable(parseMarkdown, props.text);
+  const { result: html, valid } = useAwaitable(() =>
+    props.fetcher().then(parseMarkdown)
+  );
   if (!valid) return <Loader />;
   return (
     <div
