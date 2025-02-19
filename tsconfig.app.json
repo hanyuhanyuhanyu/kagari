@@ -32,6 +32,6 @@
   },
   "include": [
     "src",
-    "story-util/MarkdownPreview.stories.tsx"
+    "story-util/**/*.tsx"
   ]
 }

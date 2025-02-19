@@ -4,7 +4,7 @@ const config: StorybookConfig = {
   stories: [
     "../src/**/*.mdx",
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
-    "../story-util/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../story-util/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
   staticDirs: ["../markdown.local"],
   addons: [
