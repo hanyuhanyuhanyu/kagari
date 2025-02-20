@@ -6,9 +6,9 @@ import RouterDefinition from "./routes/route";
 const responsive = {
   articles: {
     "col-span-12": {
-      "2xl": "col-span-3",
-      xl: "col-span-4",
       lg: "col-span-5",
+      xl: "col-span-4",
+      "2xl": "col-span-3",
     },
     "row-span-12": {
       lg: "row-span-12",
@@ -16,9 +16,9 @@ const responsive = {
   },
   main: {
     "col-span-12": {
-      "2xl": "col-span-9",
-      xl: "col-span-8",
       lg: "col-span-7",
+      xl: "col-span-8",
+      "2xl": "col-span-9",
     },
     "row-span-9": {
       lg: "row-span-12",
