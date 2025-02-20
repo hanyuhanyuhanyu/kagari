@@ -10,7 +10,7 @@ const responsive = {
       xl: "col-span-4",
       "2xl": "col-span-3",
     },
-    "row-span-12": {
+    "row-span-3": {
       lg: "row-span-12",
     },
   },
