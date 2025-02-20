@@ -5,6 +5,7 @@ function Article() {
   const { url } = useParams();
   return (
     <Markdown
+      className="overflow-x-hidden"
       fetcher={() => articleApi.getBody(decodeURIComponent(url || ""))}
       key={url}
     />
