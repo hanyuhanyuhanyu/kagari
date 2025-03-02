@@ -85,3 +85,8 @@ export const _20250220: Story = {
     src: "20250220.md",
   },
 };
+export const claude: Story = {
+  args: {
+    src: "20250302.md",
+  },
+};
