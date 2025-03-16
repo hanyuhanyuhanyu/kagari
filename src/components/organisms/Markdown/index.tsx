@@ -29,7 +29,7 @@ function Markdown(props: Props) {
       <script
         async
         src="https://platform.twitter.com/widgets.js"
-        charset="utf-8"
+        charSet="utf-8"
       ></script>
       <div
         className={`${props.className} markdown-wrapper`}
