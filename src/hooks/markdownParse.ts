@@ -77,7 +77,6 @@ function purify() {
           },
         })
       ) as RootContent;
-      console.log(tree.children[i]);
     });
   };
 }
