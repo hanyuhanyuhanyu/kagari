@@ -4,13 +4,14 @@ import RemarkBreaks from "remark-breaks";
 import RemarkEmoji from "remark-emoji";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
+import rehypeRaw from "rehype-raw";
 import type { Root as HastRoot, RootContent } from "hast";
 import mermaid from "mermaid";
 import { getTheme } from "../global/theme";
 import rehypeExpressiveCode from "rehype-expressive-code";
 import remarkGfm from "remark-gfm";
 import { visit } from "unist-util-visit";
-import { sanitize } from "hast-util-sanitize";
+import { defaultSchema, sanitize } from "hast-util-sanitize";
 
 mermaid.initialize({ theme: getTheme() });
 mermaid.registerIconPacks([
@@ -66,7 +67,17 @@ function VisualizeMermaid() {
 function purify() {
   return async function (tree: HastRoot) {
     tree.children.forEach((n, i) => {
-      tree.children[i] = sanitize(n) as RootContent;
+      tree.children[i] = sanitize(
+        n,
+        Object.assign({}, defaultSchema, {
+          tagNames: [...(defaultSchema.tagNames || []), "blockquote"],
+          attributes: {
+            ...defaultSchema.attributes,
+            blockquote: ["className", "dataLang", "dataTheme"],
+          },
+        })
+      ) as RootContent;
+      console.log(tree.children[i]);
     });
   };
 }
@@ -78,6 +89,7 @@ export async function parseMarkdown(text: string) {
     .use(remarkGfm)
     .use(RemarkEmoji)
     .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
     .use(purify)
     .use(VisualizeMermaid)
     .use(rehypeExpressiveCode)
