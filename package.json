@@ -18,7 +18,7 @@
     "@iconify-json/simple-icons": "^1.2.24",
     "@iconify/json": "^2.2.307",
     "@react-router/dev": "^7.1.5",
-    "@tailwindcss/vite": "^4.0.6",
+    "@tailwindcss/vite": "^4.0.15",
     "dompurify": "^3.2.4",
     "hast-util-sanitize": "^5.0.2",
     "mermaid": "^11.4.1",
