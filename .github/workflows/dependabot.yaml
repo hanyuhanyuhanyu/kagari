@@ -6,8 +6,11 @@ permissions:
 jobs:
   dependabot:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'hanyuhanyuhanyu/kagari'
     steps:
+      - name: Log GitHub Event
+        env:
+          GITHUB_EVENT: ${{ toJson(github.event) }}
+        run: echo "$GITHUB_EVENT"
       - name: Enable dependabot autio merge
         if: ${{ !contains(steps.metadata.outputs.dependency-names , 'storybook') && (steps.metadata.outputs.update-type == 'version-update:semver-patch' || steps.metadata.outputs.update-type == 'version-update:semver-minor') }}
         run: gh pr merge --auto --merge "$PR_URL"
