@@ -9,9 +9,8 @@ jobs:
     steps:
       - name: Log GitHub Event
         env:
-          GITHUB_EVENT: ${{ toJson(github.event) }}
-          STEPS: ${{ toJson(steps.metadata.outputs) }}
-        run: echo "$GITHUB_EVENT" && echo "$STEPS"
+          STEPS: ${{ toJson(steps) }}
+        run: echo "$STEPS"
       - name: Enable dependabot autio merge
         if: ${{ !contains(steps.metadata.outputs.dependency-names , 'storybook') && (steps.metadata.outputs.update-type == 'version-update:semver-patch' || steps.metadata.outputs.update-type == 'version-update:semver-minor') }}
         run: gh pr merge --auto --merge "$PR_URL"
