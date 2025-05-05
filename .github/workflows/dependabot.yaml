@@ -8,7 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'hanyuhanyuhanyu/kagari'
     steps:
-      - name: Enable dependabot autio merge
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@8ca800c1642f5e46fd4fe73c07af0e3baf1375d6
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Log metadata
+        env:
+          STEPS: ${{ toJson(steps) }}
+        run: echo "$STEPS"
+      - name: Enable dependabot auto merge
         if: ${{ !contains(steps.metadata.outputs.dependency-names , 'storybook') && (steps.metadata.outputs.update-type == 'version-update:semver-patch' || steps.metadata.outputs.update-type == 'version-update:semver-minor') }}
         run: gh pr merge --auto --merge "$PR_URL"
         env:
