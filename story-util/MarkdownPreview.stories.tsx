@@ -95,3 +95,8 @@ export const _fz: Story = {
     src: "20250316.md",
   },
 };
+export const _mod: Story = {
+  args: {
+    src: "20250505.md",
+  },
+};

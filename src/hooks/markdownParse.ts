@@ -4,6 +4,8 @@ import RemarkBreaks from "remark-breaks";
 import RemarkEmoji from "remark-emoji";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 import rehypeRaw from "rehype-raw";
 import type { Root as HastRoot, RootContent } from "hast";
 import mermaid from "mermaid";
@@ -87,9 +89,11 @@ export async function parseMarkdown(text: string) {
     .use(RemarkBreaks)
     .use(remarkGfm)
     .use(RemarkEmoji)
+    .use(remarkMath)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
     .use(purify)
+    .use(rehypeKatex, { output: "mathml", fleqn: true, leqno: true })
     .use(VisualizeMermaid)
     .use(rehypeExpressiveCode)
     .use(rehypeStringify, { allowDangerousHtml: true })
