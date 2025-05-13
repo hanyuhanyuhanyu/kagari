@@ -15,7 +15,7 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@iconify-json/logos": "^1.2.4",
-    "@iconify-json/simple-icons": "^1.2.24",
+    "@iconify-json/simple-icons": "^1.2.34",
     "@iconify/json": "^2.2.333",
     "@react-router/dev": "^7.1.5",
     "@tailwindcss/vite": "^4.1.3",
