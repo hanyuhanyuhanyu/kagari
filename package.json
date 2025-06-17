@@ -48,7 +48,7 @@
     "@storybook/addon-onboarding": "^8.6.12",
     "@storybook/blocks": "^8.6.12",
     "@storybook/react": "^8.6.12",
-    "@storybook/react-vite": "^8.6.12",
+    "@storybook/react-vite": "^9.0.10",
     "@storybook/test": "^8.6.12",
     "@types/node": "^22.13.5",
     "@types/react": "19.0.10",
